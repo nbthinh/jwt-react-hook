@@ -76,3 +76,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - https://v5.reactrouter.com/web/guides/quick-start
 - `npm install --save-exact axios@0.25.0`
 - `npm install --save-exact react-toastify@8.1.0`
+- https://react-bootstrap.netlify.app/docs/components/modal
