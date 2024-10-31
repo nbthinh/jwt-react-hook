@@ -4,7 +4,7 @@ import { userState, useEffect } from "react";
 const ModalDelete = (props) => {
     return (
         <>
-            <Modal show={props.show} onHide={props.handleClose}>
+            <Modal show={props.show} onHide={props.handleClose} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Confirm delete user</Modal.Title>
                 </Modal.Header>
