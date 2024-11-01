@@ -13,6 +13,7 @@ const Users = (props) => {
     const [totalPages, setTotalPages] = useState(0);
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
     const [dataModal, setDataModal] = useState({});
+    const [isShowModalUser, setIsShowModalUser] = useState(false);
     let history = useHistory();
     // useEffect(() => {
     //     let session = sessionStorage.getItem("account"); 
@@ -57,9 +58,12 @@ const Users = (props) => {
     const handleClose = () => {
         setIsShowModalDelete(false);
         setDataModal({});
-
-
     }
+
+    const onHideModalUser = () => {
+        setIsShowModalUser(false);
+    }
+
 
     const confirmDeleteUser =async () => {
         let response = await deleteUser(dataModal);
@@ -84,7 +88,7 @@ const Users = (props) => {
                         </div>
                         <div className="actions">
                             <button className="btn btn-success">Refresh</button>
-                            <button className="btn btn-primary">Add new user</button>
+                            <button className="btn btn-primary" onClick={() => setIsShowModalUser(true)}>Add new user</button>
                         </div>
                     </div>
                     <div className="user-body">
@@ -166,6 +170,8 @@ const Users = (props) => {
             />
             <ModalUser
                 title={"Create New User"}
+                show={isShowModalUser}
+                onHide={onHideModalUser}
             />
         </>
     );
