@@ -35,10 +35,11 @@ const Users = (props) => {
 
     const fetchUsers = async (page) => {
         let response = await fetchAllUsers(currentPage, currentLimit);
-        if (response && response.data && response.data.EC === 0 && response.data.DT.users) {
-            console.log("response.data.DT = ", response);
-            setTotalPages(response.data.DT.totalPages);
-            setListUsers(response.data.DT.users);
+        console.log(">>>>> check response = ", response);
+        if (response && response.EC === 0 && response.DT.users) {
+            console.log("response.DT = ", response);
+            setTotalPages(response.DT.totalPages);
+            setListUsers(response.DT.users);
         }
     }
     const handlePageClick = async (event) => {
@@ -51,12 +52,12 @@ const Users = (props) => {
         setIsShowModalDelete(true);
         // let response = await deleteUser(user);
         // console.log(">>> check response = ", response);
-        // if (response && response.data.EC === 0) {
-        //     toast.success(response.data.EM);
+        // if (response && response.EC === 0) {
+        //     toast.success(response.EM);
         //     await fetchUsers();
         // }
         // else {
-        //     toast.error(response.data.EM);
+        //     toast.error(response.EM);
         // }
     }
 
@@ -75,13 +76,13 @@ const Users = (props) => {
     const confirmDeleteUser =async () => {
         let response = await deleteUser(dataModal);
         console.log(">>> check response = ", response);
-        if (response && response.data.EC === 0) {
-            toast.success(response.data.EM);
+        if (response && response.EC === 0) {
+            toast.success(response.EM);
             await fetchUsers();
             setIsShowModalDelete(false);
         }
         else {
-            toast.error(response.data.EM);
+            toast.error(response.EM);
         }
     }
 

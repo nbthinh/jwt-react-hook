@@ -53,15 +53,15 @@ const ModalUser = (props) => {
 
     const getGroups = async () => {
         let response = await fetchGroup();
-        if (response && response.data && response.data.EC === 0) {
-            setUserGroups(response.data.DT);
-            if (response.data.DT && response.data.DT.length > 0) {
-                let groups = response.data.DT;
+        if (response && response.EC === 0) {
+            setUserGroups(response.DT);
+            if (response.DT && response.DT.length > 0) {
+                let groups = response.DT;
                 setUserData({...userData, group: groups[0].id})
             }
         }
         else {
-            toast.error(response.data.EM);
+            toast.error(response.EM);
         }
     }
     const handleOnchangeInput = (value, name) => {
@@ -95,15 +95,15 @@ const ModalUser = (props) => {
                 : await updateCurrentUser({...userData, groupId: userData.group});
             ;
             console.log("check response = ", res);
-            if (res && res.data && res.data.EC === 0 ) {
+            if (res  && res.EC === 0 ) {
                 toast.success("Create success");
                 props.onHide();
                 setUserData({...defaultUserValue, group: userGroups && userGroups.length > 0 ?  userGroups[0].id : "" });
             }
-            if (res && res.data && res.data.EC !== 0) {
-                toast.error(res.data.EM);
+            if (res && res.EC !== 0) {
+                toast.error(res.EM);
                 let _validInputs = _.cloneDeep(validInputsDefault);
-                _validInputs[res.data.DT] = false;
+                _validInputs[res.DT] = false;
                 setValidInputs(_validInputs);
             }
         }
