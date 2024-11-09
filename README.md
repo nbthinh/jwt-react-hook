@@ -77,3 +77,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - `npm install --save-exact axios@0.25.0`
 - `npm install --save-exact react-toastify@8.1.0`
 - https://react-bootstrap.netlify.app/docs/components/modal
+- Xem lại video 11.1
+- `npm install --save-exact jsonwebtoken@8.5.1 cookie-parser@1.4.6`
+- https://www.npmjs.com/package/jsonwebtoken?activeTab=readme
