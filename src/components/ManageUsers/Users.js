@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { fetchAllUsers, deleteUser } from "../../services/userService";
 import ReactPaginate from 'react-paginate';
@@ -28,8 +28,9 @@ const Users = (props) => {
     // }, []);
 
     useEffect(() => {
-        console.log("Chạy lại");
         fetchUsers();
+        
+        
         let c = document.cookie.split(";").reduce( (ac, cv, i) => Object.assign(ac, {[cv.split('=')[0]]: cv.split('=')[1]}), {});
 
         console.log("c = ", c);
@@ -38,9 +39,7 @@ const Users = (props) => {
 
     const fetchUsers = async (page) => {
         let response = await fetchAllUsers(currentPage, currentLimit);
-        console.log(">>>>> check response = ", response);
         if (response && response.EC === 0 && response.DT.users) {
-            console.log("response.DT = ", response);
             setTotalPages(response.DT.totalPages);
             setListUsers(response.DT.users);
         }
@@ -78,7 +77,6 @@ const Users = (props) => {
 
     const confirmDeleteUser =async () => {
         let response = await deleteUser(dataModal);
-        console.log(">>> check response = ", response);
         if (response && response.EC === 0) {
             toast.success(response.EM);
             await fetchUsers();

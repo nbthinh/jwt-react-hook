@@ -1,12 +1,14 @@
 import "./Login.scss";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { toast } from "react-toastify";
 import { loginUser } from "../../services/userService";
 
 import { useEffect } from "react";
+import { UserContext } from "../../context/UserContext";
 const Login = (props) => {
+    const {loginContext} = useContext(UserContext);
     const [valueLogin, setValueLogin] = useState("");
     const [password, setPassword] = useState("");
     const defaultObjValidInput = {
@@ -36,12 +38,17 @@ const Login = (props) => {
         let response = await loginUser(valueLogin, password);
         console.log("response = ", response);
         if (response && +response.EC === 0) {
+            let {groupWithRoles, email, username } = response.DT
+            let token = response.DT.access_token
             // success
+            console.log("[response] = ", response);
             let data = {
                 isAuthenticated: true,
-                token: "fake token"
+                token: token,
+                account: {groupWithRoles, email, username}
             }
             sessionStorage.setItem("account", JSON.stringify(data));
+            loginContext(data);
             history.push("/users");
             window.location.relead();
         }
