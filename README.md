@@ -80,3 +80,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - Xem lại video 11.1
 - `npm install --save-exact jsonwebtoken@8.5.1 cookie-parser@1.4.6`
 - https://www.npmjs.com/package/jsonwebtoken?activeTab=readme
+- https://mhnpd.github.io/react-loader-spinner/docs/components/blocks
