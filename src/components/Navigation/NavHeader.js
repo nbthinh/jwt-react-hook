@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 
 
 const NavHeader = (props) => {
-    const {user, logoutContext} = useContext(UserContext);
+    const { user, logoutContext } = useContext(UserContext);
     const location = useLocation();
     const history = useHistory();
     const handleLogout = async () => {
@@ -38,7 +38,7 @@ const NavHeader = (props) => {
                     <Navbar bg="header" expand="lg">
                         <Container>
                             <Navbar.Brand href="#home">
-                                <img 
+                                <img
                                     src={logo}
                                     width="35"
                                     className="d-inline-block align-top"
@@ -53,40 +53,41 @@ const NavHeader = (props) => {
                                     <NavLink to="/" exact className="nav-link">Home</NavLink>
                                     <NavLink to="/users" className="nav-link">Users</NavLink>
                                     <NavLink to="/roles" className="nav-link">Roles</NavLink>
+                                    <NavLink to="/group-role" className="nav-link">Group-Role</NavLink>
                                     <NavLink to="/projects" className="nav-link">Projects</NavLink>
                                     <NavLink to="/about" className="nav-link">About</NavLink>
                                 </Nav>
                                 <Nav>
                                     {
                                         user && user.isAuthenticated === true
-                                        ?
-                                        <>
-                                            <Nav.Item className="nav-link">
-                                                Welcome {user.account.username} !
-                                            </Nav.Item>
+                                            ?
+                                            <>
+                                                <Nav.Item className="nav-link">
+                                                    Welcome {user.account.username} !
+                                                </Nav.Item>
 
-                                            <NavDropdown title="Settings" id="collapsible-nav-dropdown">
-                                                <NavDropdown.Item>
-                                                    Change password
-                                                </NavDropdown.Item>
-                                                <NavDropdown.Divider />
-                                                <NavDropdown.Item>
-                                                    <span onClick={() => handleLogout()}>
-                                                        Logout
-                                                    </span>
-                                                </NavDropdown.Item>
-                                            </NavDropdown>
-                                        </>
-                                        :
-                                        <Link className="nav-link" to="/login">
-                                            Login
-                                        </Link>
+                                                <NavDropdown title="Settings" id="collapsible-nav-dropdown">
+                                                    <NavDropdown.Item>
+                                                        Change password
+                                                    </NavDropdown.Item>
+                                                    <NavDropdown.Divider />
+                                                    <NavDropdown.Item>
+                                                        <span onClick={() => handleLogout()}>
+                                                            Logout
+                                                        </span>
+                                                    </NavDropdown.Item>
+                                                </NavDropdown>
+                                            </>
+                                            :
+                                            <Link className="nav-link" to="/login">
+                                                Login
+                                            </Link>
                                     }
-                                    
+
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
-                        
+
                     </Navbar>
                 </div>
                 {/* <div className="topnav">
