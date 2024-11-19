@@ -1,11 +1,12 @@
 import "./Role.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import _ from "lodash";
 import { toast } from 'react-toastify';
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import { createRoles } from "../../services/roleService";
-
+import TableRole from "./TableRole";
 const Role = (props) => {
+    const childRef = useRef();
     const dataChildDefault = {
         url: "",
         description: "",
@@ -14,7 +15,7 @@ const Role = (props) => {
     const [listChilds, setListChilds] = useState({
         child1: dataChildDefault
     });
-    
+
     const handleOnchangeInput = (name, value, key) => {
         let _listChilds = _.cloneDeep(listChilds);
         _listChilds[key][name] = value;
@@ -56,8 +57,8 @@ const Role = (props) => {
             let res = await createRoles(data);
             if (res && res.EC === 0) {
                 toast.success(res.EM);
+                childRef.current.fetchListRolesAgain();
             }
-            console.log();
         }
         else {
             // Error
@@ -71,7 +72,7 @@ const Role = (props) => {
     return (
         <div className="role-container">
             <div className="container">
-                <div className="mt-3">
+                <div className="adding-roles mt-3">
                     <div className="title-role">
                         <h4>Add a new role...</h4>
                     </div>
@@ -84,7 +85,7 @@ const Role = (props) => {
                                             <label>URL:</label>
                                             <input
                                                 type="text"
-                                                className={ child.isValidUrl ? "form-control" : "form-control is-invalid" }
+                                                className={child.isValidUrl ? "form-control" : "form-control is-invalid"}
                                                 value={child.url}
                                                 onChange={(event) => handleOnchangeInput("url", event.target.value, key)}
                                             />
@@ -108,11 +109,16 @@ const Role = (props) => {
                                 )
                             })
                         }
-                        
+
                     </div>
                     <div>
                         <button className="btn btn-warning mt-3" onClick={() => handleSave()}>Save</button>
                     </div>
+                </div>
+                <hr />
+                <div className="mt-3 table-role">
+                    <h4>List current roles</h4>
+                    <TableRole ref={childRef} />
                 </div>
             </div>
         </div>
