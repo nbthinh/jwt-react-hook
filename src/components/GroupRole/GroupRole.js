@@ -90,21 +90,21 @@ const GroupRole = (props) => {
         let groupRolesFilter = _assignRolesByGroup.filter((item) => item.isAssigned === true);
         let finalGroupRoles = groupRolesFilter.map(item => {
             let data = {
-                groupId: selectGroup, roleId: item.id
+                groupId: +selectGroup, roleId: item.id
             }
             return data;
         })
 
-        console.log('finalGroupRoles = ', finalGroupRoles);
-        // result.groupRoles = groupRolesFilter;
+        result.groupRoles = finalGroupRoles;
         return result;
     }
 
-    const handleSave = () => {
+    const handleSave = async () => {
         let data = buildDataToSave();
-
-        console.log("assignRolesByGroup = ", assignRolesByGroup);
-        console.log("checkSavedata = ", data);
+        let res = await assignRolesToGroup(data);
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
+        }
     }
 
     return (<div className="group-role-container">
